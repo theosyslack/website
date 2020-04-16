@@ -6,35 +6,39 @@
 
 const path = require(`path`)
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
-  const Post = path.resolve(`src/templates/Post.js`)
-  const result = await graphql(`
-    {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              path
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators
+
+  return new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allFile(filter: { extension: { regex: "/.md/" } }) {
+          edges {
+            node {
+              absolutePath
+              relativeDirectory
+              name
             }
           }
         }
       }
-    }
-  `)
-  // Handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.frontmatter.path,
-      component: Post,
-      context: {}, // additional data can be passed via context
-    })
+    `)
+      .then(result => {
+        if (result.errors) {
+          return reject(result.errors)
+        }
+
+        console.log(`Pages`, result.data.allFile.edges)
+        // Create markdown pages.
+        result.data.allFile.edges.forEach(
+          ({ node: { absolutePath, relativeDirectory, name } }) => {
+            createPage({
+              path: `${relativeDirectory}/${name}`,
+              component: absolutePath,
+            })
+          }
+        )
+      })
+      .then(resolve)
   })
 }

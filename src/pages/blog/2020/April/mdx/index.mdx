@@ -1,0 +1,24 @@
+import TestComponent from "./TestComponent"
+
+# Testing
+
+## Big old test
+
+<TestComponent />
+
+```javascript{numberLines: true}
+function createSequentialFSM(states = []) {
+  let currentIndex = 0
+
+  return {
+    get state() {
+      return states[currentIndex]
+    },
+    transition: () => {
+      let nextIndex = ++currentIndex % states.length
+      currentIndex = nextIndex
+      return states[currentIndex]
+    },
+  }
+}
+```
