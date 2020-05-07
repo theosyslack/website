@@ -12,7 +12,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allFile(filter: { extension: { regex: "/.md/" } }) {
+        allFile(filter: { extension: { regex: "/.mdx?$/" } }) {
           edges {
             node {
               absolutePath
@@ -28,7 +28,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           return reject(result.errors)
         }
 
-        console.log(`Pages`, result.data.allFile.edges)
         // Create markdown pages.
         result.data.allFile.edges.forEach(
           ({ node: { absolutePath, relativeDirectory, name } }) => {

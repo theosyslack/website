@@ -35,11 +35,20 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/blog`,
+        name: `posts`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: ["gatsby-remark-prismjs"],
         defaultLayouts: {
+          posts: require.resolve("./src/components/posts-layout.js"),
+
           default: require.resolve("./src/components/layout.js"),
         },
       },

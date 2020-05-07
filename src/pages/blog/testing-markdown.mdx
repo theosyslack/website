@@ -1,19 +1,21 @@
-import TestComponent from "./TestComponent"
-
-# Testing
+---
+path: "/blog/testing-markdown"
+title: "Testing Markdown"
+date: "2020-04-16"
+---
 
 ## Big old test
-
-<TestComponent />
 
 ```javascript{numberLines: true}
 function createSequentialFSM(states = []) {
   let currentIndex = 0
 
   return {
+    // highlight-start
     get state() {
       return states[currentIndex]
     },
+    // highlight-end
     transition: () => {
       let nextIndex = ++currentIndex % states.length
       currentIndex = nextIndex

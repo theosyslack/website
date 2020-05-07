@@ -11,9 +11,12 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import "./layout.css"
 import "./syntax.css"
+import "./post.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
+import SEO from "./seo"
+
+const Layout = ({ children, pageContext }) => {
+  const { site } = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -23,12 +26,15 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const siteTitle = site?.siteMetadata?.title
+
   return (
     <>
+      <SEO title={pageContext?.frontmatter?.title || ""} />
       <div className="layout">
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
+          {siteTitle} | © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>

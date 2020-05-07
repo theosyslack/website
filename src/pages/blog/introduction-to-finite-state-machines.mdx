@@ -1,0 +1,26 @@
+---
+path: "/blog/introduction-to-finite-state-machines"
+title: "Introduction to Finite State Machines"
+excerpt: "This is a test"
+date: "2020-04-16"
+tags:
+  - Programming Concepts
+---
+
+# Introduction to Finite State Machines
+
+Suppose that you wanted to write a program that mimics a stoplight. For this example, a stoplight has a few important properties to consider.
+
+- Be able to display three colors -- `Red`, `Yellow`, and `Green`
+- Must only show one of these color at a time
+- Must be sequential.
+
+That last point is the most tricky. It's easy enough to accomplish the first two just by updating a variable `lightColor`. But it's too easy to accidentally set `lightColor` to the wrong color -- or even worse, something confusing like `Orange` or `Chartruse`. So, how can we create a function that ensures the light color is changed exactly how we'd expect it?
+
+This is where a Finite State Machine comes in handy.
+
+Finite State Machines are a coding pattern that you can use to simplify managing your application. There a few reasons why you might use Finite State Machines (FSMs).
+
+## -
+
+- Convince people you have a Computer Science degree

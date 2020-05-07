@@ -1,0 +1,17 @@
+.Post {
+  margin-top: 1em;
+}
+
+.Post__title {
+  font-size: 2.125rem;
+  color: #fff8f8;
+  line-height: 1.147058824;
+}
+
+.Post__subtitle {
+  font-family: "Playfair Display", Cambria, Cochin, Georgia, Times,
+    "Times New Roman", serif;
+  font-size: 1rem;
+  color: #d08b8b;
+  line-height: 1.3125;
+}
